@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.6" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-4.4.0+hotfix.2" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.3+4" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.2.2" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.5" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
