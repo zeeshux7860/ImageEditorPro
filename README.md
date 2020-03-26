@@ -2,8 +2,6 @@
 
 Image Editor Plugin with simple, easy support for image editing using Paints, Text, Filters, Emoji and Sticker like stories.
 
-## Getting Started
-
 To start with this, we need to simply add the dependencies in the gradle file of our app module like this
 
 ## Installation
