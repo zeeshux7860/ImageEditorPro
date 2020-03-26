@@ -12,27 +12,6 @@ Import
 import 'package:image_editor_pro/image_editor_pro.dart';
 ```
 
-Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
-
-```dart
- Future<void> getimageditor()  {
-    final geteditimage =   Navigator.push(context, MaterialPageRoute(
-        builder: (context){
-          return ImageEditorPro(
-            appBarColor: Colors.blue,
-            bottomBarColor: Colors.blue,
-          );
-        }
-    )).then((geteditimage){
-      if(geteditimage != null){
-        setState(() {
-          _image =  geteditimage;
-        });
-      }
-    }).catchError((er){print(er);});
-
-  }
-```
 ### iOS
 
 Add the following keys to your _Info.plist_ file, located in `<project root>/ios/Runner/Info.plist`:
@@ -55,6 +34,29 @@ Or in text format add the key:
 ### Android
 
 No configuration required - the plugin should work out of the box.
+
+Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
+
+```dart
+ Future<void> getimageditor()  {
+    final geteditimage =   Navigator.push(context, MaterialPageRoute(
+        builder: (context){
+          return ImageEditorPro(
+            appBarColor: Colors.blue,
+            bottomBarColor: Colors.blue,
+          );
+        }
+    )).then((geteditimage){
+      if(geteditimage != null){
+        setState(() {
+          _image =  geteditimage;
+        });
+      }
+    }).catchError((er){print(er);});
+
+  }
+```
+
 
 
 ## Credits
