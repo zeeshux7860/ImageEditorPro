@@ -39,7 +39,6 @@ Add this function to Your StateFull Widget Check the [Example](https://github.co
 ## Credits
 - This project is inspired from [PhotoEditor by Burhanuddin Rashid](https://github.com/burhanrashid52/PhotoEditor)
 
-Thanks to [Get Emoji](https://getemoji.com/) for Emoji's
 
 ## MIT License
 
