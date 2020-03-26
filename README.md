@@ -4,11 +4,6 @@ Image Editor Plugin with simple, easy support for image editing using Paints, Te
 
 To start with this, we need to simply add the dependencies in the gradle file of our app module like this
 
-![Simulator Screen Shot - iPhone 11 Pro Max - 2020-03-26 at 18 56 34](https://user-images.githubusercontent.com/55942632/77652176-dc974c00-6f93-11ea-85f3-c5ec2ef2f75c.png)![Simulator Screen Shot - iPhone 11 Pro Max - 2020-03-26 at 18 57 11](https://user-images.githubusercontent.com/55942632/77652152-d43f1100-6f93-11ea-9e4f-7684d6113668.png)![Simulator Screen Shot - iPhone 11 Pro Max - 2020-03-26 at 18 57 33](https://user-images.githubusercontent.com/55942632/77652204-e620b400-6f93-11ea-8ddb-de02f73bd2d3.png)
-
-
-
-
 ## Installation
 
 First, add `image_editor_pro:` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
