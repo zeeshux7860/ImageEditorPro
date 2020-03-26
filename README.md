@@ -12,7 +12,7 @@ Import
 import 'package:image_editor_pro/image_editor_pro.dart';
 ```
 
-Add this function to Your StateFull Widget 
+Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
 
 ```dart
  Future<void> getimageditor()  {
@@ -33,6 +33,8 @@ Add this function to Your StateFull Widget
 
   }
 ```
+
+
 
 ## Credits
 - This project is inspired from [PhotoEditor by Burhanuddin Rashid](https://github.com/burhanrashid52/PhotoEditor)
