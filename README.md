@@ -4,6 +4,9 @@ Image Editor Plugin with simple, easy support for image editing using Paints, Te
 
 To start with this, we need to simply add the dependencies in the gradle file of our app module like this
 
+![imageeditorprogithub](https://user-images.githubusercontent.com/55942632/77652902-fedd9980-6f94-11ea-96d5-d31657590893.png)
+
+
 ## Installation
 
 First, add `image_editor_pro:` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
