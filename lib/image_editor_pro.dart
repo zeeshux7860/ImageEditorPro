@@ -112,6 +112,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           title: new Text("Select Height Width"),
                           actions: <Widget>[
                             FlatButton(
+                              onPressed: () => Navigator.pop(context),
+                              textColor: Colors.red,
+                              child: Text("Cancel"),
+                            ),
+                            FlatButton(
                                 onPressed: () {
                                   setState(() {
                                   height =   int.parse(heightcontroler.text);
