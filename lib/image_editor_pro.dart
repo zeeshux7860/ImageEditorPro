@@ -17,10 +17,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:signature/signature.dart';
 
-TextEditingController heightcontroler=  TextEditingController();
-TextEditingController widthcontroler=  TextEditingController();
 var width = 300;
 var height = 300;
+TextEditingController heightcontroler=  TextEditingController(text: "$height");
+TextEditingController widthcontroler=  TextEditingController(text: "$width");
 
 List fontsize = [];
 var howmuchwidgetis = 0;
@@ -118,8 +118,6 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                    width =  int.parse(widthcontroler.text);
 
                                   });
-                                  heightcontroler.clear();
-                                  widthcontroler.clear();
                                   Navigator.pop(context);
                                 },
                                 child: new Text("Done"))
