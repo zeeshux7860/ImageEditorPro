@@ -1,8 +1,7 @@
 name: image_editor_pro
-description: Image Editor  Plugin  for Both Android and IOS
-version: 0.0.1
-author: zeeshux7860,theindianappguy
-homepage:
+description: Image Editor Plugin with simple, easy support for image editing using paints,text and emoji like stories.
+version: 1.0.6
+homepage: https://github.com/zeeshux7860/Image_editor_pro_package
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -16,7 +15,7 @@ dependencies:
   image_picker: ^0.6.3+1
   path_provider: ^1.6.5
   image_gallery_saver: ^1.2.2
-  permission_handler: ^4.2.0+hotfix.3
+  permission_handler: ^5.0.0+hotfix.3
   dio: ^3.0.9
   screenshot: ^0.1.1
   signature: ^3.0.0

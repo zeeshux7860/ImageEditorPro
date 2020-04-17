@@ -17,8 +17,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:signature/signature.dart';
 
-TextEditingController heightcontroler=  TextEditingController();
-TextEditingController widthcontroler=  TextEditingController();
+TextEditingController heightcontroler = TextEditingController();
+TextEditingController widthcontroler = TextEditingController();
 var width = 300;
 var height = 300;
 
@@ -33,7 +33,7 @@ SignatureController _controller =
 class ImageEditorPro extends StatefulWidget {
   final Color appBarColor;
   final Color bottomBarColor;
-  ImageEditorPro({this.appBarColor,this.bottomBarColor});
+  ImageEditorPro({this.appBarColor, this.bottomBarColor});
 
   @override
   _ImageEditorProState createState() => _ImageEditorProState();
@@ -62,7 +62,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   List<Offset> _points = <Offset>[];
   List type = [];
   List aligment = [];
-  File _imageFile;
+
   final GlobalKey container = GlobalKey();
   final GlobalKey globalKey = new GlobalKey();
   File _image;
@@ -74,12 +74,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
       timeprediction = tim;
     });
   }
+
   @override
   void dispose() {
     timeprediction.cancel();
     // TODO: implement dispose
     super.dispose();
   }
+
   @override
   void initState() {
     timers();
@@ -95,9 +97,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
         backgroundColor: Colors.grey,
         key: scaf,
         appBar: new AppBar(
@@ -114,9 +114,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             FlatButton(
                                 onPressed: () {
                                   setState(() {
-                                  height =   int.parse(heightcontroler.text);
-                                   width =  int.parse(widthcontroler.text);
-
+                                    height = int.parse(heightcontroler.text);
+                                    width = int.parse(widthcontroler.text);
                                   });
                                   heightcontroler.clear();
                                   widthcontroler.clear();
@@ -134,8 +133,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   height: 10,
                                 ),
                                 TextField(
-                                  controller: heightcontroler,
-                                  keyboardType: TextInputType.numberWithOptions(),
+                                    controller: heightcontroler,
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
                                         hintText: 'Height',
                                         contentPadding:
@@ -149,11 +149,10 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   height: 10,
                                 ),
                                 TextField(
-                                  controller: widthcontroler,
-                                  keyboardType: TextInputType.numberWithOptions(),
-
+                                    controller: widthcontroler,
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
-                                      
                                         hintText: 'Width',
                                         contentPadding:
                                             EdgeInsets.only(left: 10),
@@ -170,16 +169,16 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   _controller.points.clear();
                   setState(() {});
                 }),
-            
             new IconButton(
                 icon: Icon(Icons.camera),
                 onPressed: () {
                   bottomsheets();
                 }),
-                new FlatButton(
+            new FlatButton(
                 child: new Text("Done"),
                 textColor: Colors.white,
                 onPressed: () {
+                  File _imageFile;
                   _imageFile = null;
                   screenshotController
                       .capture(
@@ -190,9 +189,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       _imageFile = image;
                     });
                     final paths = await getExternalStorageDirectory();
-                    image.copy(paths.path + '/'+DateTime.now().millisecondsSinceEpoch.toString()+'.png');
-                    Navigator.pop(context,image);
-
+                    image.copy(paths.path +
+                        '/' +
+                        DateTime.now().millisecondsSinceEpoch.toString() +
+                        '.png');
+                    Navigator.pop(context, image);
                   }).catchError((onError) {
                     print(onError);
                   });
@@ -208,7 +209,6 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               color: Colors.white,
               width: width.toDouble(),
               height: height.toDouble(),
-              
               child: RepaintBoundary(
                   key: globalKey,
                   child: Stack(
@@ -301,10 +301,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
         bottomNavigationBar: openbottomsheet
             ? new Container()
             : Container(
-                decoration:
-                    BoxDecoration(
-                        color: widget.bottomBarColor,
-                        boxShadow: [BoxShadow(blurRadius: 10.9)]),
+                decoration: BoxDecoration(
+                    color: widget.bottomBarColor,
+                    boxShadow: [BoxShadow(blurRadius: 10.9)]),
                 height: 70,
                 child: new ListView(
                   scrollDirection: Axis.horizontal,
@@ -373,9 +372,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     BottomBarContainer(
                       icons: Icons.photo,
                       ontap: () {
-                        showModalBottomSheet(context: context, builder: (context){
-                          return ColorPiskersSlider();
-                        });
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return ColorPiskersSlider();
+                            });
                       },
                       title: 'Filter',
                     ),
@@ -388,14 +389,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               return Emojies();
                             });
                         getemojis.then((value) {
-                          if(value != null){
+                          if (value != null) {
                             type.add(1);
-                          fontsize.add(20);
-                          offsets.add(Offset.zero);
-                          multiwidget.add(value);
-                          howmuchwidgetis++;
+                            fontsize.add(20);
+                            offsets.add(Offset.zero);
+                            multiwidget.add(value);
+                            howmuchwidgetis++;
                           }
-                          
                         });
                       },
                       title: 'Emoji',
@@ -584,7 +584,6 @@ class _SlidersState extends State<Sliders> {
   }
 }
 
-
 class ColorPiskersSlider extends StatefulWidget {
   @override
   _ColorPiskersSliderState createState() => _ColorPiskersSliderState();
@@ -598,38 +597,31 @@ class _ColorPiskersSliderState extends State<ColorPiskersSlider> {
       height: 260,
       color: Colors.white,
       child: new Column(
-     
         children: <Widget>[
           Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: new Text("Slider Filter Color"),
-            ),
-            Divider(
-              height: 1,
-            ),
-            SizedBox(height: 20),
-            new Text("Slider Color"),
-            SizedBox(height: 10),
-             BarColorPicker(
-                width: 300,
-                thumbColor: Colors.white,
-                cornerRadius: 10,
-                pickMode: PickMode.Color,
-                colorListener: (int value) {
-                  setState(() {
+            padding: const EdgeInsets.all(15.0),
+            child: new Text("Slider Filter Color"),
+          ),
+          Divider(
+            height: 1,
+          ),
+          SizedBox(height: 20),
+          new Text("Slider Color"),
+          SizedBox(height: 10),
+          BarColorPicker(
+              width: 300,
+              thumbColor: Colors.white,
+              cornerRadius: 10,
+              pickMode: PickMode.Color,
+              colorListener: (int value) {
+                setState(() {
                   //  currentColor = Color(value);
-                  });
-                }),
-                SizedBox(height: 20),
-            new Text("Slider Opicity"),
-            SizedBox(height: 10),
-             Slider(value: 0.1, 
-             min: 0.0,
-             max: 1.0,
-             onChanged: (v)
-             {
-
-             })
+                });
+              }),
+          SizedBox(height: 20),
+          new Text("Slider Opicity"),
+          SizedBox(height: 10),
+          Slider(value: 0.1, min: 0.0, max: 1.0, onChanged: (v) {})
         ],
       ),
     );
