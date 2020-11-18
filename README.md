@@ -74,11 +74,11 @@ Add this function to Your StateFull Widget Check the [Example](https://github.co
 
 ## MIT License
 
-<<<<<<< HEAD
-Copyright (c) 2019 Zeeshan & Sanskar
-=======
+
+
+
 Copyright (c) 2019 Zeeshan & Sanskar 
->>>>>>> 213753d4c91df4428a6f25d1c9028eed3d73191c
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
