@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_editor_pro/util/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_editor_pro/modules/all_emojies.dart';
 import 'package:image_editor_pro/modules/bottombar_container.dart';
@@ -33,7 +34,8 @@ SignatureController _controller =
 class ImageEditorPro extends StatefulWidget {
   final Color appBarColor;
   final Color bottomBarColor;
-  ImageEditorPro({this.appBarColor, this.bottomBarColor});
+  final int hideBottomAppBarItem;
+  ImageEditorPro({this.appBarColor, this.bottomBarColor, this.hideBottomAppBarItem});
 
   @override
   _ImageEditorProState createState() => _ImageEditorProState();
@@ -45,6 +47,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   // create some values
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
+  int hideBottomAppBarItem;
 
 // ValueChanged<Color> callback
   void changeColor(Color color) {
@@ -97,6 +100,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
+    if(mounted){
+      setState(() {
+        hideBottomAppBarItem = widget.hideBottomAppBarItem;
+      });
+    }
     return Scaffold(
         backgroundColor: Colors.grey,
         key: scaf,
@@ -301,108 +309,113 @@ class _ImageEditorProState extends State<ImageEditorPro> {
         bottomNavigationBar: openbottomsheet
             ? new Container()
             : Container(
-                decoration: BoxDecoration(
-                    color: widget.bottomBarColor,
-                    boxShadow: [BoxShadow(blurRadius: 10.9)]),
-                height: 70,
-                child: new ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    BottomBarContainer(
-                      colors: widget.bottomBarColor,
-                      icons: FontAwesomeIcons.brush,
-                      ontap: () {
-                        // raise the [showDialog] widget
-                        showDialog(
-                            context: context,
-                            child: AlertDialog(
-                              title: const Text('Pick a color!'),
-                              content: SingleChildScrollView(
-                                child: ColorPicker(
-                                  pickerColor: pickerColor,
-                                  onColorChanged: changeColor,
-                                  showLabel: true,
-                                  pickerAreaHeightPercent: 0.8,
-                                ),
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: const Text('Got it'),
-                                  onPressed: () {
-                                    setState(() => currentColor = pickerColor);
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            ));
-                      },
-                      title: 'Brush',
-                    ),
-                    BottomBarContainer(
-                      icons: Icons.text_fields,
-                      ontap: () async {
-                        final value = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TextEditor()));
-                        if (value.toString().isEmpty) {
-                          print("true");
-                        } else {
-                          type.add(2);
-                          fontsize.add(20);
-                          offsets.add(Offset.zero);
-                          multiwidget.add(value);
-                          howmuchwidgetis++;
-                        }
-                      },
-                      title: 'Text',
-                    ),
-                    BottomBarContainer(
-                      icons: FontAwesomeIcons.eraser,
-                      ontap: () {
-                        _controller.clear();
-                        type.clear();
-                        fontsize.clear();
-                        offsets.clear();
-                        multiwidget.clear();
-                        howmuchwidgetis = 0;
-                      },
-                      title: 'Eraser',
-                    ),
-                    BottomBarContainer(
-                      icons: Icons.photo,
-                      ontap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return ColorPiskersSlider();
-                            });
-                      },
-                      title: 'Filter',
-                    ),
-                    BottomBarContainer(
-                      icons: FontAwesomeIcons.smile,
-                      ontap: () {
-                        Future getemojis = showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Emojies();
-                            });
-                        getemojis.then((value) {
-                          if (value != null) {
-                            type.add(1);
-                            fontsize.add(20);
-                            offsets.add(Offset.zero);
-                            multiwidget.add(value);
-                            howmuchwidgetis++;
-                          }
-                        });
-                      },
-                      title: 'Emoji',
-                    ),
-                  ],
-                ),
-              ));
+          decoration: BoxDecoration(
+              color: widget.bottomBarColor,
+              boxShadow: [BoxShadow(blurRadius: 10.9)]),
+          height: 70,
+          child: new ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              (hideBottomAppBarItem != null && hideBottomAppBarItem == brushIndex) ? Container() :
+              BottomBarContainer(
+                colors: widget.bottomBarColor,
+                icons: FontAwesomeIcons.brush,
+                ontap: () {
+                  // raise the [showDialog] widget
+                  showDialog(
+                      context: context,
+                      child: AlertDialog(
+                        title: const Text('Pick a color!'),
+                        content: SingleChildScrollView(
+                          child: ColorPicker(
+                            pickerColor: pickerColor,
+                            onColorChanged: changeColor,
+                            showLabel: true,
+                            pickerAreaHeightPercent: 0.8,
+                          ),
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: const Text('Got it'),
+                            onPressed: () {
+                              setState(() => currentColor = pickerColor);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ));
+                },
+                title: 'Brush',
+              ),
+              (hideBottomAppBarItem != null && hideBottomAppBarItem == textIndex) ? Container() :
+              BottomBarContainer(
+                icons: Icons.text_fields,
+                ontap: () async {
+                  final value = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TextEditor()));
+                  if (value.toString().isEmpty || value.toString() == nullText) {
+                    print("true");
+                  } else {
+                    type.add(2);
+                    fontsize.add(20);
+                    offsets.add(Offset.zero);
+                    multiwidget.add(value);
+                    howmuchwidgetis++;
+                  }
+                },
+                title: 'Text',
+              ),
+              (hideBottomAppBarItem != null && hideBottomAppBarItem == eraserIndex) ? Container() :
+              BottomBarContainer(
+                icons: FontAwesomeIcons.eraser,
+                ontap: () {
+                  _controller.clear();
+                  type.clear();
+                  fontsize.clear();
+                  offsets.clear();
+                  multiwidget.clear();
+                  howmuchwidgetis = 0;
+                },
+                title: 'Eraser',
+              ),
+              (hideBottomAppBarItem != null && hideBottomAppBarItem == filterIndex) ? Container() :
+              BottomBarContainer(
+                icons: Icons.photo,
+                ontap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return ColorPiskersSlider();
+                      });
+                },
+                title: 'Filter',
+              ),
+              (hideBottomAppBarItem != null && hideBottomAppBarItem == emojiIndex) ? Container() :
+              BottomBarContainer(
+                icons: FontAwesomeIcons.smile,
+                ontap: () {
+                  Future getemojis = showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Emojies();
+                      });
+                  getemojis.then((value) {
+                    if (value != null) {
+                      type.add(1);
+                      fontsize.add(20);
+                      offsets.add(Offset.zero);
+                      multiwidget.add(value);
+                      howmuchwidgetis++;
+                    }
+                  });
+                },
+                title: 'Emoji',
+              ),
+            ],
+          ),
+        ));
   }
 
   void bottomsheets() {
