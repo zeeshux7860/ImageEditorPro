@@ -21,3 +21,7 @@ fix
 
 ## 1.1.0
 dependencies_updated
+
+## 1.1.1
+
+* null-safety added -fix
