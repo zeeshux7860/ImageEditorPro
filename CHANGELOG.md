@@ -25,3 +25,10 @@ dependencies_updated
 ## 1.1.1
 
 * null-safety added -fix
+## 1.1.2
+
+* null-safety added -fix
+
+## 1.1.3
+
+* null-safety added -fix
