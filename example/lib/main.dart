@@ -40,17 +40,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return condition(
-            condtion: _image == null,
-            isTue: 'Open Editor'.text().xRaisedButton(
-              onPressed: () {
-                getimageditor();
-              },
-            ).toCenter(),
-            isFalse: Image.file(_image).toCenter())
-        .xScaffold(
-            appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(),
-            floatingActionButton:
-                Icons.add.xIcons().xFloationActiobButton(color: Colors.red));
+      condtion: _image == null,
+      isTue: 'Open Editor'.text().xRaisedButton(
+        onPressed: () {
+          getimageditor();
+        },
+      ).toCenter(),
+      isFalse: _image == null ? Container() : Image.file(_image).toCenter(),
+    ).xScaffold(
+        appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(),
+        floatingActionButton:
+            Icons.add.xIcons().xFloationActiobButton(color: Colors.red));
   }
 }
 
