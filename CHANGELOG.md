@@ -22,13 +22,15 @@ fix
 ## 1.1.0
 dependencies_updated
 
-## 1.1.1
+## 1.1.4
 
-* null-safety added -fix
-## 1.1.2
+* latest version fixed
 
-* null-safety added -fix
 
-## 1.1.3
+## 1.1.5
 
-* null-safety added -fix
+* latest version fixed
+
+## 1.1.6
+
+* fix error
