@@ -41,12 +41,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return condition(
             condtion: _image == null,
-            isTue: 'Open Editor'.text().xRaisedButton(
+            isTrue: 'Open Editor'.text().xRaisedButton(
               onPressed: () {
                 getimageditor();
               },
             ).toCenter(),
-            isFalse: Image.file(_image).toCenter())
+            isFalse:
+                _image == null ? Container() : Image.file(_image).toCenter())
         .xScaffold(
             appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(),
             floatingActionButton:
@@ -54,6 +55,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget condition({bool condtion, Widget isTue, Widget isFalse}) {
-  return condtion ? isTue : isFalse;
+Widget condition({bool condtion, Widget isTrue, Widget isFalse}) {
+  return condtion ? isTrue : isFalse;
 }
