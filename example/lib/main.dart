@@ -33,9 +33,7 @@ class _HomePageState extends State<HomePage> {
             _image = geteditimage;
           });
         }
-      }).catchError((er) {
-        print(er);
-      });
+      }).catchError(print);
 
   @override
   Widget build(BuildContext context) {
