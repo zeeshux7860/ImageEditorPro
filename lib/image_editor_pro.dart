@@ -21,8 +21,8 @@ import 'package:firexcode/firexcode.dart';
 
 TextEditingController heightcontroler = TextEditingController();
 TextEditingController widthcontroler = TextEditingController();
-var width = 300;
-var height = 300;
+var width;
+var height;
 
 List fontsize = [];
 var howmuchwidgetis = 0;
@@ -35,7 +35,8 @@ SignatureController _controller =
 class ImageEditorPro extends StatefulWidget {
   final Color appBarColor;
   final Color bottomBarColor;
-  ImageEditorPro({this.appBarColor, this.bottomBarColor});
+  final Image image;
+  ImageEditorPro({this.appBarColor, this.bottomBarColor, this.image});
 
   @override
   _ImageEditorProState createState() => _ImageEditorProState();
@@ -99,20 +100,23 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
+    width = widget.image.width.toInt();
+    height = widget.image.height.toInt();
     return Screenshot(
       controller: screenshotController,
       child: RepaintBoundary(
           key: globalKey,
           child: xStack.list(
             [
-              _image != null
-                  ? Image.file(
-                      _image,
-                      height: height.toDouble(),
-                      width: width.toDouble(),
-                      fit: BoxFit.cover,
-                    )
-                  : Container(),
+              // _image != null
+              //     ? Image.file(
+              //         _image,
+              //         height: height.toDouble(),
+              //         width: width.toDouble(),
+              //         fit: BoxFit.cover,
+              //       )
+              widget.image,
+              // : Container(),
               Signat().xGesture(
                 onPanUpdate: (DragUpdateDetails details) {
                   setState(() {
@@ -179,8 +183,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               )
             ],
           )).xContainer(
-        margin: EdgeInsets.all(20),
-        color: Colors.white,
+        padding: EdgeInsets.all(0),
+        color: Colors.blue,
         width: width.toDouble(),
         height: height.toDouble(),
       ),
@@ -250,7 +254,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       .then((binaryIntList) async {
                     //print("Capture Done");
 
-                    final paths = await getDownloadsDirectory();
+                    final paths = await getTemporaryDirectory();
 
                     final file = await File('${paths.path}/' +
                             DateTime.now().toString() +
