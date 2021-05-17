@@ -4,20 +4,17 @@ class EmojiView extends StatefulWidget {
   final double left;
   final double top;
   final Function ontap;
+  final Map mapJson;
   final Function(DragUpdateDetails) onpanupdate;
-  final double fontsize;
-  final String value;
-  final TextAlign align;
-  const EmojiView(
-      {Key key,
-      this.left,
-      this.top,
-      this.ontap,
-      this.onpanupdate,
-      this.fontsize,
-      this.value,
-      this.align})
-      : super(key: key);
+
+  const EmojiView({
+    Key key,
+    this.left,
+    this.top,
+    this.ontap,
+    this.onpanupdate,
+    this.mapJson,
+  }) : super(key: key);
   @override
   _EmojiViewState createState() => _EmojiViewState();
 }
@@ -25,11 +22,13 @@ class EmojiView extends StatefulWidget {
 class _EmojiViewState extends State<EmojiView> {
   @override
   Widget build(BuildContext context) {
-    return widget.value
+    return widget.mapJson['name']
+        .toString()
         .text(
-            textAlign: widget.align,
+            textAlign: widget.mapJson['align'],
             style: TextStyle(
-              fontSize: widget.fontsize,
+              color: widget.mapJson['color'],
+              fontSize: widget.mapJson['size'],
             ))
         .xGesture(
           onTap: widget.ontap,

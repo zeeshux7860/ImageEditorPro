@@ -1,11 +1,14 @@
 import 'package:firexcode/firexcode.dart';
 
 import '../image_editor_pro.dart';
+import 'colors_picker.dart';
 
 class Sliders extends StatefulWidget {
-  final int size;
-  final sizevalue;
-  const Sliders({Key key, this.size, this.sizevalue}) : super(key: key);
+  final int index;
+  final Map mapValue;
+
+  const Sliders({Key key, this.mapValue, this.index}) : super(key: key);
+
   @override
   _SlidersState createState() => _SlidersState();
 }
@@ -13,36 +16,93 @@ class Sliders extends StatefulWidget {
 class _SlidersState extends State<Sliders> {
   @override
   void initState() {
-    slider = widget.sizevalue;
+    //  slider = widget.sizevalue;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return xColumn.list(
+    return xColumnCC.list(
       [
-        'Slider Size'.text().xap(value: 20),
+        10.0.sizedHeight(),
+        'Size Adjust'.toUpperCase().xTextColorWhite().toCenter(),
         Divider(
-          height: 1,
-        ),
+
+            // height: 1,
+            ),
         Slider(
-            value: slider,
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
+            value: widgetJson[widget.index]['size'],
             min: 0.0,
             max: 100.0,
             onChangeEnd: (v) {
               setState(() {
-                fontsize[widget.size] = v.toInt();
+                widgetJson[widget.index]['size'] = v.toDouble();
               });
             },
             onChanged: (v) {
               setState(() {
                 slider = v;
-                print(v.toInt());
-                fontsize[widget.size] = v.toInt();
+                // print(v.toDouble());
+                widgetJson[widget.index]['size'] = v.toDouble();
               });
             }),
+        10.0.sizedHeight(),
+        xColumn.list([
+          20.0.sizedHeight(),
+          'Slider Color'.text(),
+          //   10.0.sizedHeight(),
+          xRowCC.list([
+            BarColorPicker(
+                width: 300,
+                thumbColor: Colors.white,
+                cornerRadius: 10,
+                pickMode: PickMode.Color,
+                colorListener: (int value) {
+                  setState(() {
+                    widgetJson[widget.index]['color'] = Color(value);
+                  });
+                }).xExpanded(),
+            'Reset'.text().xFlatButton(onPressed: () {})
+          ]),
+          //   20.0.sizedHeight(),
+          'Slider White Black Color'.text(),
+          //   10.0.sizedHeight(),
+          xRowCC.list([
+            BarColorPicker(
+                width: 300,
+                thumbColor: Colors.white,
+                cornerRadius: 10,
+                pickMode: PickMode.Grey,
+                colorListener: (int value) {
+                  setState(() {
+                    widgetJson[widget.index]['color'] = Color(value);
+                  });
+                }).xExpanded(),
+            'Reset'.text().xFlatButton(onPressed: () {})
+          ]),
+        ]).xContainer(color: Colors.white, rounded: 10),
+        10.0.sizedHeight(),
+        xRow.list([
+          'Remove'
+              .text()
+              .xFlatButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    widgetJson.removeAt(widget.index);
+                    back(context);
+                    // setState(() {});
+                  })
+              .xExpanded()
+        ]),
       ],
-    ).xContainer(height: 120, padding: EdgeInsets.all(10.0));
+    ).xContainer(
+      color: Colors.black87,
+      height: 350,
+      borderRadius: BorderRadius.only(
+          topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+    );
   }
 }

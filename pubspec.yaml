@@ -1,6 +1,6 @@
 name: image_editor_pro
 description: Image Editor Plugin with simple, easy support for image editing using paints,text and emoji like stories.
-version: 1.1.5
+version: 1.1.6
 homepage: https://github.com/zeeshux7860/Image_editor_pro_package
 
 environment:
@@ -14,7 +14,6 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   image_picker: ^0.7.4
   path_provider: ^2.0.1
-  image_gallery_saver: ^1.6.7
   permission_handler: ^7.0.0
   dio: ^4.0.0
   screenshot: ^0.3.0

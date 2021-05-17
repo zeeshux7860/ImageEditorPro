@@ -5,19 +5,15 @@ class TextView extends StatefulWidget {
   final double top;
   final Function ontap;
   final Function(DragUpdateDetails) onpanupdate;
-  final double fontsize;
-  final String value;
-  final TextAlign align;
-  const TextView(
-      {Key key,
-      this.left,
-      this.top,
-      this.ontap,
-      this.onpanupdate,
-      this.fontsize,
-      this.value,
-      this.align})
-      : super(key: key);
+  final Map mapJson;
+  const TextView({
+    Key key,
+    this.left,
+    this.top,
+    this.ontap,
+    this.onpanupdate,
+    this.mapJson,
+  }) : super(key: key);
   @override
   _TextViewState createState() => _TextViewState();
 }
@@ -25,11 +21,13 @@ class TextView extends StatefulWidget {
 class _TextViewState extends State<TextView> {
   @override
   Widget build(BuildContext context) {
-    return widget.value
+    return widget.mapJson['name']
+        .toString()
         .text(
-            textAlign: widget.align,
+            textAlign: widget.mapJson['align'],
             style: TextStyle(
-              fontSize: widget.fontsize,
+              color: widget.mapJson['color'],
+              fontSize: widget.mapJson['size'],
             ))
         .xGesture(
           onTap: widget.ontap,

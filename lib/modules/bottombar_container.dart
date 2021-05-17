@@ -19,7 +19,7 @@ class BottomBarContainer extends StatelessWidget {
         ])
         .xInkWell(onTap: ontap)
         .xMaterial(
-          color: Colors.black87,
+          color: colors,
         )
         .xContainer(padding: EdgeInsets.all(0.0), width: xwidth(context) / 5);
   }

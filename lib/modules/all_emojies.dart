@@ -29,7 +29,12 @@ class _EmojiesState extends State<Emojies> {
                         .xText(fontsize: 35)
                         .xContainer(padding: EdgeInsets.zero)
                         .xGesture(onTap: () {
-                  Navigator.pop(context, emoji);
+                  Navigator.pop(context, {
+                    'name': emoji,
+                    'color': Colors.white,
+                    'size': 12.0,
+                    'align': TextAlign.center
+                  });
                 }));
               }).toList())
           .xContainer(

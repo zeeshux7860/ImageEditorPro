@@ -1,5 +1,5 @@
 
-![imageeditorprogithub](https://user-images.githubusercontent.com/55942632/77652902-fedd9980-6f94-11ea-96d5-d31657590893.png)
+![imagee_editor_pro_github](./image_edior_pro.png)
 
 # ImageEditorPro
 
