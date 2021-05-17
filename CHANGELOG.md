@@ -34,3 +34,11 @@ dependencies_updated
 ## 1.1.6
 
 * fix error
+
+## 1.1.7
+
+* feature update :)
+
+## 1.1.8
+
+* feature update :)

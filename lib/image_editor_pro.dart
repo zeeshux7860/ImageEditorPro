@@ -123,7 +123,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
       controller: screenshotController,
       child: RotatedBox(
         quarterTurns: rotateValue,
-        child: ImageFilterLatest(
+        child: imageFilterLatest(
           hue: hueValue,
           brightness: brightnessValue,
           saturation: saturationValue,
@@ -787,7 +787,7 @@ class _SignatState extends State<Signat> {
   }
 }
 
-Widget ImageFilterLatest({brightness, saturation, hue, child}) {
+Widget imageFilterLatest({brightness, saturation, hue, child}) {
   return ColorFiltered(
       colorFilter:
           ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(
