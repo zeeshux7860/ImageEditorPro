@@ -153,6 +153,339 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
+    var bottomNavBarItems = <Widget>[
+      widget.disableBrushTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: FontAwesomeIcons.brush,
+              ontap: () {
+                // raise the [showDialog] widget
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: 'Pick a color!'.text(),
+                      content: ColorPicker(
+                        pickerColor: pickerColor,
+                        onColorChanged: changeColor,
+                        showLabel: true,
+                        pickerAreaHeightPercent: 0.8,
+                      ).xSingleChildScroolView(),
+                      actions: <Widget>[
+                        'Got it'.text().xFlatButton(
+                          onPressed: () {
+                            setState(() => currentColor = pickerColor);
+                            back(context);
+                          },
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+              title: 'Brush',
+            ),
+      widget.disableTextTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.text_fields,
+              ontap: () async {
+                var value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditorImage()));
+                if (value['name'] == null) {
+                  print('true');
+                } else {
+                  type.add(2);
+                  widgetJson.add(value);
+                  // fontsize.add(20);
+                  offsets.add(Offset.zero);
+                  //  colorList.add(value['color']);
+                  //    multiwidget.add(value['name']);
+                  howmuchwidgetis++;
+                }
+              },
+              title: 'Text',
+            ),
+      widget.disableFlipTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.flip,
+              ontap: () {
+                setState(() {
+                  flipValue = flipValue == 0 ? math.pi : 0;
+                });
+              },
+              title: 'Flip',
+            ),
+      widget.disableRotateTabs
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.rotate_left,
+              ontap: () {
+                setState(() {
+                  rotateValue--;
+                });
+              },
+              title: 'Rotate left',
+            ),
+      widget.disableRotateTabs
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.rotate_right,
+              ontap: () {
+                setState(() {
+                  rotateValue++;
+                });
+              },
+              title: 'Rotate right',
+            ),
+      widget.disableBlurTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.blur_on,
+              ontap: () {
+                showModalBottomSheet(
+                  shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
+                  context: context,
+                  builder: (context) {
+                    return StatefulBuilder(
+                      builder: (context, setS) {
+                        return xColumn.list(
+                          [
+                            'Slider Filter Color'.toUpperCase().xTextColorWhite().toCenter(),
+                            Divider(
+
+                                // height: 1,
+                                ),
+                            20.0.sizedHeight(),
+                            'Slider Color'.xTextColorWhite(),
+                            //   10.0.sizedHeight(),
+                            xRowCC.list([
+                              BarColorPicker(
+                                  width: 300,
+                                  thumbColor: Colors.white,
+                                  cornerRadius: 10,
+                                  pickMode: PickMode.Color,
+                                  colorListener: (int value) {
+                                    setS(() {
+                                      setState(() {
+                                        colorValue = Color(value);
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setState(() {
+                                  setS(() {
+                                    colorValue = Colors.transparent;
+                                  });
+                                });
+                              })
+                            ]),
+                            5.0.sizedHeight(),
+                            'Slider Blur'.xTextColorWhite(),
+                            10.0.sizedHeight(),
+                            xRow.list([
+                              Slider(
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.grey,
+                                  value: blurValue,
+                                  min: 0.0,
+                                  max: 10.0,
+                                  onChanged: (v) {
+                                    setS(() {
+                                      setState(() {
+                                        blurValue = v;
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setS(() {
+                                  setState(() {
+                                    blurValue = 0.0;
+                                  });
+                                });
+                              })
+                            ]),
+                            5.0.sizedHeight(),
+                            'Slider Opacity'.xTextColorWhite(),
+                            10.0.sizedHeight(),
+                            xRow.list([
+                              Slider(
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.grey,
+                                  value: opacityValue,
+                                  min: 0.00,
+                                  max: 1.0,
+                                  onChanged: (v) {
+                                    setS(() {
+                                      setState(() {
+                                        opacityValue = v;
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setS(() {
+                                  setState(() {
+                                    opacityValue = 0.0;
+                                  });
+                                });
+                              })
+                            ]),
+                          ],
+                        ).toContainer(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+                          padding: EdgeInsets.all(20),
+                          height: 400,
+                          color: Colors.black87,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+              title: 'Blur',
+            ),
+      widget.disableEraserTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: FontAwesomeIcons.eraser,
+              ontap: () {
+                _controller.clear();
+                //  type.clear();
+                // // fontsize.clear();
+                //  offsets.clear();
+                // // multiwidget.clear();
+                howmuchwidgetis = 0;
+              },
+              title: 'Eraser',
+            ),
+      widget.disableFilterTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: Icons.photo,
+              ontap: () {
+                showModalBottomSheet(
+                    shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, setS) {
+                          return xColumnCC.list([
+                            5.0.sizedHeight(),
+                            'Slider Hue'.xTextColorWhite(),
+                            10.0.sizedHeight(),
+                            xRow.list([
+                              Slider(
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.grey,
+                                  value: hueValue,
+                                  min: -10.0,
+                                  max: 10.0,
+                                  onChanged: (v) {
+                                    setS(() {
+                                      setState(() {
+                                        hueValue = v;
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setS(() {
+                                  setState(() {
+                                    blurValue = 0.0;
+                                  });
+                                });
+                              })
+                            ]),
+                            5.0.sizedHeight(),
+                            'Slider Saturation'.xTextColorWhite(),
+                            10.0.sizedHeight(),
+                            xRow.list([
+                              Slider(
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.grey,
+                                  value: saturationValue,
+                                  min: -10.0,
+                                  max: 10.0,
+                                  onChanged: (v) {
+                                    setS(() {
+                                      setState(() {
+                                        saturationValue = v;
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setS(() {
+                                  setState(() {
+                                    saturationValue = 0.0;
+                                  });
+                                });
+                              })
+                            ]),
+                            5.0.sizedHeight(),
+                            'Slider Brightness'.xTextColorWhite(),
+                            10.0.sizedHeight(),
+                            xRow.list([
+                              Slider(
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.grey,
+                                  value: brightnessValue,
+                                  min: 0.0,
+                                  max: 1.0,
+                                  onChanged: (v) {
+                                    setS(() {
+                                      setState(() {
+                                        brightnessValue = v;
+                                      });
+                                    });
+                                  }).xExpanded(),
+                              'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
+                                setS(() {
+                                  setState(() {
+                                    brightnessValue = 0.0;
+                                  });
+                                });
+                              })
+                            ])
+                          ]);
+                        },
+                      ).xContainer(
+                          color: Colors.black87, height: 300, borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)));
+                    });
+              },
+              title: 'Filter',
+            ),
+      widget.disableEmojiTab
+          ? null
+          : BottomBarContainer(
+              colors: widget.bottomBarColor,
+              icons: FontAwesomeIcons.smile,
+              ontap: () {
+                var getemojis = showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Emojies();
+                    });
+                getemojis.then((value) {
+                  if (value['name'] != null) {
+                    type.add(1);
+                    widgetJson.add(value);
+                    //    fontsize.add(20);
+                    offsets.add(Offset.zero);
+                    //  multiwidget.add(value);
+                    howmuchwidgetis++;
+                  }
+                });
+              },
+              title: 'Emoji',
+            ),
+    ].where((widget) => widget != null).toList();
     return Screenshot(
       controller: screenshotController,
       child: RotatedBox(
@@ -347,347 +680,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           // backgroundColor: Colors.red,
           backgroundColor: widget.appBarColor ?? Colors.black87,
         ),
-        bottomNavigationBar: openbottomsheet
+        bottomNavigationBar: openbottomsheet && bottomNavBarItems.isNotEmpty
             ? Container()
             : XListView(
                 scrollDirection: Axis.horizontal,
               )
                 .list(
-                  <Widget>[
-                    widget.disableBrushTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: FontAwesomeIcons.brush,
-                            ontap: () {
-                              // raise the [showDialog] widget
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: 'Pick a color!'.text(),
-                                    content: ColorPicker(
-                                      pickerColor: pickerColor,
-                                      onColorChanged: changeColor,
-                                      showLabel: true,
-                                      pickerAreaHeightPercent: 0.8,
-                                    ).xSingleChildScroolView(),
-                                    actions: <Widget>[
-                                      'Got it'.text().xFlatButton(
-                                        onPressed: () {
-                                          setState(() => currentColor = pickerColor);
-                                          back(context);
-                                        },
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            title: 'Brush',
-                          ),
-                    widget.disableTextTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.text_fields,
-                            ontap: () async {
-                              var value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditorImage()));
-                              if (value['name'] == null) {
-                                print('true');
-                              } else {
-                                type.add(2);
-                                widgetJson.add(value);
-                                // fontsize.add(20);
-                                offsets.add(Offset.zero);
-                                //  colorList.add(value['color']);
-                                //    multiwidget.add(value['name']);
-                                howmuchwidgetis++;
-                              }
-                            },
-                            title: 'Text',
-                          ),
-                    widget.disableFlipTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.flip,
-                            ontap: () {
-                              setState(() {
-                                flipValue = flipValue == 0 ? math.pi : 0;
-                              });
-                            },
-                            title: 'Flip',
-                          ),
-                    widget.disableRotateTabs
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.rotate_left,
-                            ontap: () {
-                              setState(() {
-                                rotateValue--;
-                              });
-                            },
-                            title: 'Rotate left',
-                          ),
-                    widget.disableRotateTabs
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.rotate_right,
-                            ontap: () {
-                              setState(() {
-                                rotateValue++;
-                              });
-                            },
-                            title: 'Rotate right',
-                          ),
-                    widget.disableBlurTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.blur_on,
-                            ontap: () {
-                              showModalBottomSheet(
-                                shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
-                                context: context,
-                                builder: (context) {
-                                  return StatefulBuilder(
-                                    builder: (context, setS) {
-                                      return xColumn.list(
-                                        [
-                                          'Slider Filter Color'.toUpperCase().xTextColorWhite().toCenter(),
-                                          Divider(
-
-                                              // height: 1,
-                                              ),
-                                          20.0.sizedHeight(),
-                                          'Slider Color'.xTextColorWhite(),
-                                          //   10.0.sizedHeight(),
-                                          xRowCC.list([
-                                            BarColorPicker(
-                                                width: 300,
-                                                thumbColor: Colors.white,
-                                                cornerRadius: 10,
-                                                pickMode: PickMode.Color,
-                                                colorListener: (int value) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      colorValue = Color(value);
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setState(() {
-                                                setS(() {
-                                                  colorValue = Colors.transparent;
-                                                });
-                                              });
-                                            })
-                                          ]),
-                                          5.0.sizedHeight(),
-                                          'Slider Blur'.xTextColorWhite(),
-                                          10.0.sizedHeight(),
-                                          xRow.list([
-                                            Slider(
-                                                activeColor: Colors.white,
-                                                inactiveColor: Colors.grey,
-                                                value: blurValue,
-                                                min: 0.0,
-                                                max: 10.0,
-                                                onChanged: (v) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      blurValue = v;
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setS(() {
-                                                setState(() {
-                                                  blurValue = 0.0;
-                                                });
-                                              });
-                                            })
-                                          ]),
-                                          5.0.sizedHeight(),
-                                          'Slider Opacity'.xTextColorWhite(),
-                                          10.0.sizedHeight(),
-                                          xRow.list([
-                                            Slider(
-                                                activeColor: Colors.white,
-                                                inactiveColor: Colors.grey,
-                                                value: opacityValue,
-                                                min: 0.00,
-                                                max: 1.0,
-                                                onChanged: (v) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      opacityValue = v;
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setS(() {
-                                                setState(() {
-                                                  opacityValue = 0.0;
-                                                });
-                                              });
-                                            })
-                                          ]),
-                                        ],
-                                      ).toContainer(
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
-                                        padding: EdgeInsets.all(20),
-                                        height: 400,
-                                        color: Colors.black87,
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                            title: 'Blur',
-                          ),
-                    widget.disableEraserTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: FontAwesomeIcons.eraser,
-                            ontap: () {
-                              _controller.clear();
-                              //  type.clear();
-                              // // fontsize.clear();
-                              //  offsets.clear();
-                              // // multiwidget.clear();
-                              howmuchwidgetis = 0;
-                            },
-                            title: 'Eraser',
-                          ),
-                    widget.disableFilterTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: Icons.photo,
-                            ontap: () {
-                              showModalBottomSheet(
-                                  shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
-                                  context: context,
-                                  builder: (context) {
-                                    return StatefulBuilder(
-                                      builder: (context, setS) {
-                                        return xColumnCC.list([
-                                          5.0.sizedHeight(),
-                                          'Slider Hue'.xTextColorWhite(),
-                                          10.0.sizedHeight(),
-                                          xRow.list([
-                                            Slider(
-                                                activeColor: Colors.white,
-                                                inactiveColor: Colors.grey,
-                                                value: hueValue,
-                                                min: -10.0,
-                                                max: 10.0,
-                                                onChanged: (v) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      hueValue = v;
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setS(() {
-                                                setState(() {
-                                                  blurValue = 0.0;
-                                                });
-                                              });
-                                            })
-                                          ]),
-                                          5.0.sizedHeight(),
-                                          'Slider Saturation'.xTextColorWhite(),
-                                          10.0.sizedHeight(),
-                                          xRow.list([
-                                            Slider(
-                                                activeColor: Colors.white,
-                                                inactiveColor: Colors.grey,
-                                                value: saturationValue,
-                                                min: -10.0,
-                                                max: 10.0,
-                                                onChanged: (v) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      saturationValue = v;
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setS(() {
-                                                setState(() {
-                                                  saturationValue = 0.0;
-                                                });
-                                              });
-                                            })
-                                          ]),
-                                          5.0.sizedHeight(),
-                                          'Slider Brightness'.xTextColorWhite(),
-                                          10.0.sizedHeight(),
-                                          xRow.list([
-                                            Slider(
-                                                activeColor: Colors.white,
-                                                inactiveColor: Colors.grey,
-                                                value: brightnessValue,
-                                                min: 0.0,
-                                                max: 1.0,
-                                                onChanged: (v) {
-                                                  setS(() {
-                                                    setState(() {
-                                                      brightnessValue = v;
-                                                    });
-                                                  });
-                                                }).xExpanded(),
-                                            'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                              setS(() {
-                                                setState(() {
-                                                  brightnessValue = 0.0;
-                                                });
-                                              });
-                                            })
-                                          ])
-                                        ]);
-                                      },
-                                    ).xContainer(
-                                        color: Colors.black87,
-                                        height: 300,
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)));
-                                  });
-                            },
-                            title: 'Filter',
-                          ),
-                    widget.disableEmojiTab
-                        ? null
-                        : BottomBarContainer(
-                            colors: widget.bottomBarColor,
-                            icons: FontAwesomeIcons.smile,
-                            ontap: () {
-                              var getemojis = showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Emojies();
-                                  });
-                              getemojis.then((value) {
-                                if (value['name'] != null) {
-                                  type.add(1);
-                                  widgetJson.add(value);
-                                  //    fontsize.add(20);
-                                  offsets.add(Offset.zero);
-                                  //  multiwidget.add(value);
-                                  howmuchwidgetis++;
-                                }
-                              });
-                            },
-                            title: 'Emoji',
-                          ),
-                  ].where((widget) => widget != null).toList(),
+                  bottomNavBarItems,
                 )
                 .xContainer(
                   padding: EdgeInsets.all(0.0),
