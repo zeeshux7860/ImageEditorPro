@@ -680,7 +680,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           // backgroundColor: Colors.red,
           backgroundColor: widget.appBarColor ?? Colors.black87,
         ),
-        bottomNavigationBar: openbottomsheet && bottomNavBarItems.isNotEmpty
+        bottomNavigationBar: openbottomsheet || bottomNavBarItems.isEmpty
             ? Container()
             : XListView(
                 scrollDirection: Axis.horizontal,
