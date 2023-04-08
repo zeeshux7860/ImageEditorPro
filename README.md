@@ -43,7 +43,7 @@ No configuration required - the plugin should work out of the box.
 Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
 
 ```dart
- Future<void> getimageditor()  {
+ Future<void> getimageditor() async {
     final geteditimage =   Navigator.push(context, MaterialPageRoute(
         builder: (context){
           return ImageEditorPro(
