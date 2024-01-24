@@ -4,10 +4,10 @@ import '../image_editor_pro.dart';
 import 'colors_picker.dart';
 
 class Sliders extends StatefulWidget {
-  final int index;
-  final Map mapValue;
+  final int? index;
+  final Map? mapValue;
 
-  const Sliders({Key key, this.mapValue, this.index}) : super(key: key);
+  const Sliders({Key? key, this.mapValue, this.index}) : super(key: key);
 
   @override
   _SlidersState createState() => _SlidersState();
@@ -34,19 +34,19 @@ class _SlidersState extends State<Sliders> {
         Slider(
             activeColor: Colors.white,
             inactiveColor: Colors.grey,
-            value: widgetJson[widget.index]['size'],
+            value: widgetJson[widget.index!]!['size'],
             min: 0.0,
             max: 100.0,
             onChangeEnd: (v) {
               setState(() {
-                widgetJson[widget.index]['size'] = v.toDouble();
+                widgetJson[widget.index!]!['size'] = v.toDouble();
               });
             },
             onChanged: (v) {
               setState(() {
                 slider = v;
                 // print(v.toDouble());
-                widgetJson[widget.index]['size'] = v.toDouble();
+                widgetJson[widget.index!]!['size'] = v.toDouble();
               });
             }),
         10.0.sizedHeight(),
@@ -62,7 +62,7 @@ class _SlidersState extends State<Sliders> {
                 pickMode: PickMode.Color,
                 colorListener: (int value) {
                   setState(() {
-                    widgetJson[widget.index]['color'] = Color(value);
+                    widgetJson[widget.index!]!['color'] = Color(value);
                   });
                 }).xExpanded(),
             'Reset'.text().xFlatButton(onPressed: () {})
@@ -78,7 +78,7 @@ class _SlidersState extends State<Sliders> {
                 pickMode: PickMode.Grey,
                 colorListener: (int value) {
                   setState(() {
-                    widgetJson[widget.index]['color'] = Color(value);
+                    widgetJson[widget.index!]!['color'] = Color(value);
                   });
                 }).xExpanded(),
             'Reset'.text().xFlatButton(onPressed: () {})
@@ -91,7 +91,7 @@ class _SlidersState extends State<Sliders> {
               .xFlatButton(
                   color: Colors.white,
                   onPressed: () {
-                    widgetJson.removeAt(widget.index);
+                    widgetJson.removeAt(widget.index!);
                     back(context);
                     // setState(() {});
                   })

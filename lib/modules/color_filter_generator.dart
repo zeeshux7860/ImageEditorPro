@@ -1,7 +1,7 @@
 import 'dart:math';
 
 class ColorFilterGenerator {
-  static List<double> hueAdjustMatrix({double value}) {
+  static List<double> hueAdjustMatrix({required double value}) {
     value = value * pi;
 
     if (value == 0) {
@@ -59,7 +59,7 @@ class ColorFilterGenerator {
     ]).map((i) => i.toDouble()).toList();
   }
 
-  static List<double> brightnessAdjustMatrix({double value}) {
+  static List<double> brightnessAdjustMatrix({required double value}) {
     if (value <= 0) {
       value = value * 255;
     } else {
@@ -115,7 +115,7 @@ class ColorFilterGenerator {
     ]).map((i) => i.toDouble()).toList();
   }
 
-  static List<double> saturationAdjustMatrix({double value}) {
+  static List<double> saturationAdjustMatrix({required double value}) {
     value = value * 100;
 
     if (value == 0) {

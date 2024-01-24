@@ -1,14 +1,14 @@
 import 'package:firexcode/firexcode.dart';
 
 class EmojiView extends StatefulWidget {
-  final double left;
-  final double top;
-  final Function ontap;
-  final Map mapJson;
-  final Function(DragUpdateDetails) onpanupdate;
+  final double? left;
+  final double? top;
+  final Function? ontap;
+  final Map? mapJson;
+  final Function(DragUpdateDetails)? onpanupdate;
 
   const EmojiView({
-    Key key,
+    Key? key,
     this.left,
     this.top,
     this.ontap,
@@ -22,16 +22,16 @@ class EmojiView extends StatefulWidget {
 class _EmojiViewState extends State<EmojiView> {
   @override
   Widget build(BuildContext context) {
-    return widget.mapJson['name']
+    return widget.mapJson!['name']
         .toString()
         .text(
-            textAlign: widget.mapJson['align'],
+            textAlign: widget.mapJson!['align'],
             style: TextStyle(
-              color: widget.mapJson['color'],
-              fontSize: widget.mapJson['size'],
+              color: widget.mapJson!['color'],
+              fontSize: widget.mapJson!['size'],
             ))
         .xGesture(
-          onTap: widget.ontap,
+          onTap: widget.ontap as void Function()?,
           onPanUpdate: widget.onpanupdate,
         )
         .xPositioned(

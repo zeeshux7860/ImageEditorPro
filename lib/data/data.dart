@@ -1441,5 +1441,5 @@ List<String> getSmileys() {
   emoji = '🤾🏾‍♀️️️️‍';
   emojis.add(emoji);
 
-  return emojis;
+  return emojis as List<String>;
 }
